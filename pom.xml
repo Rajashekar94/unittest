@@ -7,4 +7,10 @@
 <version>1.0.0</version>
 <name>helloworld</name>
 
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit-dep</artifactId>
+    <version>4.8.2</version>
+</dependency>
+
 </project>
