@@ -22,10 +22,7 @@ docker run -v $(pwd)Rajashekar94/unittest/:/opt node:10.15.3-stretch /bin/bash -
 
         }
         
-    catch (err) {
-    currentBuild.result = "FAILURE"
-    throw err
- }
+    
  }
 		
     }
