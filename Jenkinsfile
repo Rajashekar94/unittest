@@ -1,10 +1,7 @@
-#!groovy
-
-node('server_build_slave') {
-
-try {
-
-   stage('Checkout'){
+pipeline { 
+    agent any  
+    stages { 
+        stage('Checkout'){
 
       checkout scm
    }
@@ -24,13 +21,11 @@ docker run -v $(pwd)Rajashekar94/unittest/:/opt node:10.15.3-stretch /bin/bash -
 '''
 
         }
-
-
-}
-
-catch (err) {
+        }
+	catch (err) {
     currentBuild.result = "FAILURE"
     throw err
  }
+		
+    }
 
-}
