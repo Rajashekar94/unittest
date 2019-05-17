@@ -1,11 +1,11 @@
-pipeline {
-   agent{
-try {
+node {
+    def app
 
-   stage('Checkout'){
+    stage('Clone repository') {
+        /* Cloning the Repository to our Workspace */
 
-      checkout scm
-   }
+        checkout scm
+    }
 stage('compress dist folder')
 {
         
