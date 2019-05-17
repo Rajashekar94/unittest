@@ -6,7 +6,7 @@ node {
 
         checkout scm
     }
-stage('compress dist folder')
+stage('Build maven_artifactory')
 {
         
 
