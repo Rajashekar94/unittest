@@ -1,9 +1,10 @@
-pipeline { 
-    agent any  
-  
-        stage('Checkout'){
+node {
+
+try {
+
+   stage('Checkout'){
 
       checkout scm
-   
-    }
+   }
+}
 }
