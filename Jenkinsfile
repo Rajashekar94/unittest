@@ -1,4 +1,4 @@
-node('server_build_slave') {
+pipeline {
 
 try {
 
