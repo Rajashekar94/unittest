@@ -26,10 +26,7 @@ docker run -v $(pwd):/opt maven:3-alpine /bin/bash -c "cd /opt && mvn clean && m
 
 }
 
-catch (err) {
-    currentBuild.result = "FAILURE"
-    throw err
- }
-   }
 
-}
+   
+
+
