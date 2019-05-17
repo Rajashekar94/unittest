@@ -1,5 +1,5 @@
 pipeline {
-
+   agent{
 try {
 
    stage('Checkout'){
@@ -30,5 +30,6 @@ catch (err) {
     currentBuild.result = "FAILURE"
     throw err
  }
+   }
 
 }
