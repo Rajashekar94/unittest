@@ -11,7 +11,7 @@ node {
 stage('Build maven_artifactory'){
 
  
-  sh "mvn clean"
+  sh "sudo mvn clean"
 
 	
 }
