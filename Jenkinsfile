@@ -2,18 +2,16 @@
 
 node {
     def app
-
+   
     stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
 
         checkout scm
     }
-stage('Build maven_artifactory'){
-
- 
-  sh "mvn clean package"
-
-	
-}
+   stage('Build') {
+      steps {
+        sh 'mvn -B -DskipTests clean package'
+      }
+	}
 }
 
