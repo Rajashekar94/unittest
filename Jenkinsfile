@@ -10,11 +10,11 @@ node {
     }
 stage('Build maven_artifactory'){
 
-   
-
-     sh ' mvn install '
-	 
-	 }
-	 }
-	 
+    def mvn_version = 'M3'
+withEnv( ["PATH+MAVEN=${/home/ubuntu/installations/apache-maven-3.6.1}/bin"] ) {
+  //sh "mvn clean package"
+}
+	
+}
+}
 
