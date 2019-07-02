@@ -11,7 +11,7 @@ node {
 stage('Build maven_artifactory'){
 
  
-  sh "mvn install"
+  sh "mvn --version && which mvn && mvn install"
 
 	
 }
