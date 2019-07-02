@@ -1,4 +1,5 @@
 
+
 node {
     def app
 
@@ -8,9 +9,12 @@ node {
         checkout scm
     }
 stage('Build maven_artifactory'){
-  
-	sh ' mvn install '
-     
+
+    withEnv( ["PATH+MAVEN=${/home/ubuntu/installations/apache-maven-3.6.1}/bin"] ) {
+
+     sh ' mvn install '
+	 
+	 }
 	 }
 	 }
 
