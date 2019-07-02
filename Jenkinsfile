@@ -18,14 +18,14 @@ pipeline {
                 )
 
                 rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
+                    //id: "MAVEN_DEPLOYER",
                     serverId: "artifactory-1",
                     releaseRepo: "libs-release-local",
                     snapshotRepo: "libs-snapshot-local"
                 )
 
                 rtMavenResolver (
-                    id: "MAVEN_RESOLVER",
+                    //id: "MAVEN_RESOLVER",
                     serverId: "artifactory-1",
                     releaseRepo: "libs-release",
                     snapshotRepo: "libs-snapshot"
@@ -39,8 +39,8 @@ pipeline {
                     tool: MAVEN_TOOL, // Tool name from Jenkins configuration
                     pom: 'pom.xml',
                     goals: 'clean install',
-                    deployerId: "MAVEN_DEPLOYER",
-                    resolverId: "MAVEN_RESOLVER"
+                    //deployerId: "MAVEN_DEPLOYER",
+                    //resolverId: "MAVEN_RESOLVER"
                 )
             }
         }
