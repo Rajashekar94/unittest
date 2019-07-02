@@ -11,7 +11,7 @@ node {
 stage('Build maven_artifactory'){
 
  
-  sh "/home/ubuntu/installations/apache-maven-3.6.1/bin/mvn clean"
+  sh "mvn clean"
 
 	
 }
