@@ -13,7 +13,7 @@ pipeline {
             steps {
                 rtServer (
                     id: "artifactory-1",
-                    url: http://localhost:8081/artifactory,
+                    url: http://localhost:8081/artifactory
                     
                 )
 
