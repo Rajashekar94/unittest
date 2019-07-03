@@ -21,6 +21,17 @@ pipeline {
                   
                 }
                 }
+                
+                stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: maven, // Tool name from Jenkins configuration
+                    pom: 'unittest/pom.xml',
+                    goals: 'clean install'
+                   
+                )
+            }
+        }
         
         
         
