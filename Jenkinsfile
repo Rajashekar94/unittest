@@ -9,10 +9,6 @@ node {
         checkout scm
     }
 stage('Build maven_artifactory'){
-
- 
-  sh "mvn install"
-
-	
+     sh "mvn install"
 }
 }
