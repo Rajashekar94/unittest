@@ -12,6 +12,13 @@ pipeline {
                     id: "artifactory-1",
                     url: "http://localhost:8081/artifactory"
                   )
+                  rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "artifactory-1",
+                    releaseRepo: "libs-release-local",
+                    snapshotRepo: "libs-snapshot-local"
+                )
+                  
                 }
                 }
         
