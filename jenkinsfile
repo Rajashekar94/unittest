@@ -6,34 +6,49 @@ pipeline {
                 git branch: 'master', url: "https://github.com/Rajashekar94/unittest.git"
             }
         }
+
         stage ('Artifactory configuration') {
             steps {
                 rtServer (
-                    id: "artifactory-1",
-                    url: "http://localhost:8081/artifactory"
-                  )
-                  rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
+                    id: "artifactory",
+                    url: http://localhost:8081/artifactory,
+                    credentialsId: CREDENTIALS
+                )
+
+                rtMavenDeployer (
+                    id: "artifactory",
                     serverId: "artifactory-1",
                     releaseRepo: "libs-release-local",
                     snapshotRepo: "libs-snapshot-local"
                 )
-                  
-                }
-                }
-                
-                stage ('Exec Maven') {
+
+                rtMavenResolver (
+                    id: "artifactory",
+                    serverId: "artifactory-1",
+                    releaseRepo: "libs-release",
+                    snapshotRepo: "libs-snapshot"
+                )
+            }
+        }
+
+        stage ('Exec Maven') {
             steps {
                 rtMavenRun (
                     tool: maven, // Tool name from Jenkins configuration
                     pom: 'unittest/pom.xml',
-                    goals: 'clean install'
-                   
+                    goals: 'clean install',
+                    deployerId: "artifactory",
+                    resolverId: "artifactory"
                 )
             }
         }
-        
-        
-        
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "artifactory-1"
+                )
+            }
         }
-        }
+    }
+}
