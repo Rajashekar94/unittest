@@ -1,38 +1,13 @@
-node {
-    def server
-    def buildInfo
-    def rtMaven
-
-    stage ('Clone') {
-        git url: 'https://github.com/Rajashekar94/unittest.git'
-    }
-
-    stage ('Artifactory configuration') {
-        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
-        server = Artifactory.server artifactory-1
-
-        rtMaven = Artifactory.newMavenBuild()
-        rtMaven.tool = maven // Tool name from Jenkins configuration
-        rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
-        rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
-        rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
-
-        buildInfo = Artifactory.newBuildInfo()
-    }
-
-    stage ('Test') {
-        rtMaven.run pom: 'unittest/pom.xml', goals: 'clean test'
-    }
-
-    stage ('Install') {
-        rtMaven.run pom: 'unittest/pom.xml', goals: 'install', buildInfo: buildInfo
-    }
-
-    stage ('Deploy') {
-        rtMaven.deployer.deployArtifacts buildInfo
-    }
-
-    stage ('Publish build info') {
-        server.publishBuildInfo buildInfo
-    }
-} 
+pipeline {
+    agent any
+    stages {
+        stage ('Clone') {
+            steps {
+                git branch: 'master', url: "https://github.com/Rajashekar94/unittest.git"
+            }
+        }
+        
+        
+        
+        }
+        }
