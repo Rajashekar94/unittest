@@ -6,6 +6,14 @@ pipeline {
                 git branch: 'master', url: "https://github.com/Rajashekar94/unittest.git"
             }
         }
+        stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "artifactory-1",
+                    url: http://localhost:8081/artifactory,
+                  )
+                }
+                }
         
         
         
