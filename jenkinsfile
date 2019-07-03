@@ -1,35 +1,38 @@
-pipeline {
-  agent any
-  environment {
-    PATH = '/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin:/usr/local/apache-ant-1.10.4/bin'
-  }
+node {
+    def server
+    def buildInfo
+    def rtMaven
 
-  stages {
-    stage('Test') {
-      steps {
-	sh 'ant test'
-      }
+    stage ('Clone') {
+        git url: 'https://github.com/Rajashekar94/unittest.git'
     }
-    stage('Build') {
-      steps {
-        sh 'ant build'
-      }
-    }
-    stage('Archive') {
-      steps {
-         archiveArtifacts '**/*.jar'
-      }
-    }
-    stage('Publish_reports') {
-      steps {
-        echo "convert to html"
-      }
-    }
-    stage('Deploy') {
-      steps {
-        sh 'cp target/*.jar /tmp'
-      }
-    }
-  }
-}
 
+    stage ('Artifactory configuration') {
+        // Obtain an Artifactory server instance, defined in Jenkins --> Manage:
+        server = Artifactory.server artifactory-1
+
+        rtMaven = Artifactory.newMavenBuild()
+        rtMaven.tool = maven // Tool name from Jenkins configuration
+        rtMaven.deployer releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local', server: server
+        rtMaven.resolver releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot', server: server
+        rtMaven.deployer.deployArtifacts = false // Disable artifacts deployment during Maven run
+
+        buildInfo = Artifactory.newBuildInfo()
+    }
+
+    stage ('Test') {
+        rtMaven.run pom: 'unittest/pom.xml', goals: 'clean test'
+    }
+
+    stage ('Install') {
+        rtMaven.run pom: 'unittest/pom.xml', goals: 'install', buildInfo: buildInfo
+    }
+
+    stage ('Deploy') {
+        rtMaven.deployer.deployArtifacts buildInfo
+    }
+
+    stage ('Publish build info') {
+        server.publishBuildInfo buildInfo
+    }
+} 
