@@ -5,7 +5,7 @@
 <artifactId>helloworld</artifactId>
 <packaging>jar</packaging>
 <version>1.0.0</version>
-<name>sample</name>
+<name>Sample-Demo</name>
 
 <dependencies>  
     <dependency>  
