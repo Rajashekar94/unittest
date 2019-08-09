@@ -10,7 +10,18 @@ public class Addition {
   public int getSum() {
     return num1 + num2;
   }
-
+public int getSum() {
+    return num1 + num2;
+  }
+  public int getSum() {
+    return num1 + num2;
+  }
+  public int getSum() {
+    return num1 + num2;
+  }
+  public int getSum() {
+    return num1 + num2;
+  }
 
 }
 
