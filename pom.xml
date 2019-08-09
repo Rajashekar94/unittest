@@ -15,11 +15,7 @@
       <scope>test</scope>  
     </dependency>  
   </dependencies> 
-<modules>
-    <module>model-lib</module>
-    <module>webapp1</module>
-    <module>webapp2</module>
-  </modules>	
+
 	
 	
 	
