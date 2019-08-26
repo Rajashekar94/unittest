@@ -1,6 +1,6 @@
 node {
-  
-   stage('Preparation') { // for display purposes
+  try {
+       stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/jglick/simple-maven-project-with-tests.git'
       // Get the Maven tool.
@@ -16,7 +16,10 @@ node {
        emailext body: 'this is test email', subject: 'test-email', to: 'rajashekaryadav470@gmail.com'
     
       }
+  } catch (err) {
+    emailext body: "${err}", subject: 'failure', to: 'rajashekaryadav470@gmail.com'
    }
+ }
 
 
 
